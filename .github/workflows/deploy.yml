@@ -1,0 +1,21 @@
+name: Deploy Boomi Package
+
+on:
+  push:
+    tags:
+      - "v*"
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Read manifest
+        run: cat manifests/prod.json
+
+      - name: Deploy to Boomi
+        run: |
+          echo "Deploy triggered for tag $GITHUB_REF_NAME"
